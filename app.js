@@ -49,33 +49,54 @@ app.use(static());
 //Refactored roudtes for .status().json()
 
 app.get("/", (req,res,next) => {
-    res.status(" ")
-    statusCode:200;
-  });
+    res.status(200).json({
+        success:{
+        Message:"This Route points to the home page"},
+        statusCode:200});
+   
+    });
   
   app.get("/api/books", (req,res,next) => {
-      res.status(" This will Send all the book data")
-      statusCode:200;
+      res.status(200).json({
+        success:{
+        Message:"This Route points to the Create Book Page"},
+        statusCode:200});
+   
     });
   
     app.get("/api/books/:id", (req,res,next) => {
-      res.status(" This will Send a single book by its id")
-      statusCode:200;
+        res.status(200).json({
+            success:{
+            Message:"This will Send a single book by its id"},
+            statusCode:200});
     });
-  
+   
     app.get("/api/books/create/new", (req,res,next) => {
-      res.status("This will create a new book")
-      statusCode:200;
+        res.status(200).json({
+            success:{
+            Message:"This will create a new book"},
+            statusCode:200});
     });
+
+ 
     app.get("/api/books/update/:id", (req,res,next) => {
-      res.status("This will update a book by its id")
-      statusCode:200;
-    
+        res.status(200).json({
+            success:{
+            Message:"This will update a book by its id"},
+            statusCode:200});
+  
     });
     app.get("/api/books/delete/:id", (req,res,next) => {
-      res.status("This will delete a book by its id ")
-      statusCode:200;
+        res.status(200).json({
+            success:{
+            Message:"This will delete a book by its id"},
+            statusCode:200});
     });
 
     // have the app.listen() start the server and send a console log to
     // to the terminal with start message that says `The server is listening on port ${PORT}`
+
+    app.listen(PORT,() =>{
+      console.log(`Server is listening on port ${PORT},Connection has been established`);
+      console.log(`http://localhost:${PORT}/`)
+    });
