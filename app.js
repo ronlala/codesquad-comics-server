@@ -1,5 +1,9 @@
 const express = require("express");
 const app = express();
+// const for bookRoutes 
+
+const bookRoutes = require("/api/books")
+
 
 const PORT = 8080;
 // require the following dependencies 
@@ -14,6 +18,9 @@ app.use(morgan("dev"));
 app.use(helmet());
 app.use (express.json());
 app.use(express.urlencoded({extended:true}));
+app.use("/api/books",bookRoutes);
+
+
 
 
 //routes with send method
@@ -22,6 +29,8 @@ app.use(express.urlencoded({extended:true}));
 //   res.send(" ")
 
 // });
+
+// Book Routes moved to bookRoutes.js
 
 // app.get("/api/books", (req,res,next) => {
 //     res.send(" This will Send all the book data")
@@ -56,42 +65,42 @@ app.get("/", (req,res,next) => {
    
     });
   
-  app.get("/api/books", (req,res,next) => {
-      res.status(200).json({
-        success:{
-        Message:"This Route points to the Create Book Page"},
-        statusCode:200});
+//   app.get("/api/books", (req,res,next) => {
+//       res.status(200).json({
+//         success:{
+//         Message:"This Route points to the Create Book Page"},
+//         statusCode:200});
    
-    });
+//     });
   
-    app.get("/api/books/:id", (req,res,next) => {
-        res.status(200).json({
-            success:{
-            Message:"This will Send a single book by its id"},
-            statusCode:200});
-    });
+//     app.get("/api/books/:id", (req,res,next) => {
+//         res.status(200).json({
+//             success:{
+//             Message:"This will Send a single book by its id"},
+//             statusCode:200});
+//     });
    
-    app.get("/api/books/create/new", (req,res,next) => {
-        res.status(200).json({
-            success:{
-            Message:"This will create a new book"},
-            statusCode:200});
-    });
+//     app.get("/api/books/create/new", (req,res,next) => {
+//         res.status(200).json({
+//             success:{
+//             Message:"This will create a new book"},
+//             statusCode:200});
+//     });
 
  
-    app.get("/api/books/update/:id", (req,res,next) => {
-        res.status(200).json({
-            success:{
-            Message:"This will update a book by its id"},
-            statusCode:200});
+//     app.get("/api/books/update/:id", (req,res,next) => {
+//         res.status(200).json({
+//             success:{
+//             Message:"This will update a book by its id"},
+//             statusCode:200});
   
-    });
-    app.get("/api/books/delete/:id", (req,res,next) => {
-        res.status(200).json({
-            success:{
-            Message:"This will delete a book by its id"},
-            statusCode:200});
-    });
+//     });
+//     app.get("/api/books/delete/:id", (req,res,next) => {
+//         res.status(200).json({
+//             success:{
+//             Message:"This will delete a book by its id"},
+//             statusCode:200});
+//     });
 
     // have the app.listen() start the server and send a console log to
     // to the terminal with start message that says `The server is listening on port ${PORT}`
