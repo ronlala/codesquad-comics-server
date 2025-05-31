@@ -6,13 +6,13 @@ const { getAllBooks, getBook,createBook,updateBook,deleteBook} = require("../con
 
 router.get("/", getAllBooks);
 
-  router.get("/:id", getBook);
+  router.get("/:_id", getBook);
 
   router.post("/create/new", createBook);
 
-  router.put("/update/:_id", updateBook);
+  router.put("/update/:id", updateBook);
   
-  router.delete("/delete/:_id", deleteBook);
+  router.delete("/delete/:id", deleteBook);
   
  
 

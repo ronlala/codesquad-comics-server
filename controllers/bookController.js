@@ -6,7 +6,7 @@ const getAllBooks = async (req,res,next) => {
     try{
     return res.status(200).json({
       success:{
-      Message:"This Route points to the Create Book Page"},
+      Message:"This Route points to all books"},
       data:{books},
       statusCode: 200,
   })
@@ -22,7 +22,7 @@ const getBook = async(req,res,next) => {
     const {id} = req.param;
     try{
         const books = booksLibrary.find(booksLibrary =>
-            bookInventory.id == id);
+            bookInventory._id == _id);
             return res.status(200).json({
                 success:{message: "Book found"},
                 data: {book},
@@ -99,7 +99,7 @@ const deleteBook = async (req,res,next) => {
     const{id} = req.params;
     
     try {
-        const removeBook =books.filter((book) => book.id !== id);
+        const removeBook =books.filter((book) => book._id !== _id);
         console.log(removeBook)
 
         return res.status(200).json({
