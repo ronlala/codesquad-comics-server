@@ -12,18 +12,22 @@ const bookRoutes = require("./routes/bookRoutes");
 
 const PORT = process.env.PORT || 8080;
 // require the following dependencies 
+const path = require("node:path");
 const morgan = require("morgan");
 const helmet = require("helmet");
 const cors = require("cors");
+const session = require("express-session");
+const passport = require("passport");
 
 //middleware section 
 
 app.use(cors());
 app.use(morgan("dev"));
-app.use(helmet());
+app.use(helmet({contentSecurityPolicy: false}));
 app.use (express.json());
 app.use(express.urlencoded({extended:true}));
 app.use("/api/books",bookRoutes);
+app.use(express.static(path.join(__dirname+"/public")));
 
 app.use((err,req,res,next) =>{
    if (err.code === 11000){
