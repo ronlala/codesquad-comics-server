@@ -1,0 +1,39 @@
+{
+  "name": "codesquad-comics-server",
+  "version": "1.0.0",
+  "description": "node express server course project",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ronlala/codesquad-comics-server.git"
+  },
+  "author": "LaRonda Lanae Chairse",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ronlala/codesquad-comics-server/issues"
+  },
+  "homepage": "https://github.com/ronlala/codesquad-comics-server#readme",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.5",
+    "dot": "^1.1.3",
+    "dotenv": "^16.5.0",
+    "env": "^0.0.2",
+    "express": "^5.1.0",
+    "express-session": "^1.18.1",
+    "mongodb": "^6.17.0",
+    "mongoose": "^8.15.1",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "helmet": "^8.1.0",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.1.10"
+  }
+}
