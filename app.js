@@ -23,7 +23,7 @@ const app = express();
 const bookRoutes = require("./routes/bookRoutes.js");
 const authRoutes = require("./routes/authRoutes.js");
 
-const PORT = process.env.PORT || 8080
+const PORT = process.env.PORT || 3000
 
 //middleware section 
 
