@@ -1,7 +1,7 @@
 const express = require ("express");
 const passport = require ("passport");
-const Router = express.Router();
-const {register, login , logout, localLogin} = require("../controllers/authController");
+const router = express.Router();
+const {register, login, logout, localLogin} = require("../controllers/authController");
 
 router.post("/register", register);
 router.get("/login", login);
@@ -20,3 +20,4 @@ router.get("/auth/google/callback",
         successRedirect: "/dashboard",
     })
 );
+module.exports = router;

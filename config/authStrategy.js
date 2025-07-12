@@ -1,6 +1,7 @@
 const passport = require("passport");
 const Bcrypt = require("bcrypt");
 const localStrategy = require("passport-local").Strategy;
+const googleStrategy = require("passport-google-oauth20").Strategy;
 
 const User = require("../models/userModel");
 
@@ -34,10 +35,10 @@ passport.use(
     // Google authentication strategy 
 
 passport.use(
-    new GoogleStrategy(
+    new googleStrategy(
         {
             clientID: process.env.GOOGLE_CLIENT_ID,
-            clientSecret: parocess.env.GOOGLE_CLIENT_SECRET,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
             callBackURL: "http://localhost:3000/auth/google/callback",
         },
     async (accessToken, refreshToken, Profiler, done) => {

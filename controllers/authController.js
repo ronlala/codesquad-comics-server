@@ -3,6 +3,15 @@ const bcrypt = require("bcrypt");
 
 const User = require("../models/userModel");
 
+
+
+
+const login = async (req, res, next) => {
+  response.status(200).json({
+    success: { message: "User logged in." },
+  });
+};
+
 const localLogin = async (req, res , next) => {
 
    passport.authenticate("local",(err,user,info) => {
@@ -34,15 +43,15 @@ const localLogin = async (req, res , next) => {
 };
 
 const register = async (req, res, next) => {
-    const {firstName, lastName, username, password} = request.body;
-    console.log(request.body);
+    const {firstName, lastName, userName, password} = req.body;
+    console.log(req.body);
     
 try{
     const newUser= new User ({
         firstName: firstName,
         lastName: lastName,
-        username: username,
-        password: hashedPassword,
+        userName: userName,
+        password: password,
         googleId: "",
      
     });
@@ -85,3 +94,4 @@ const logout = async(req, res,next) => {
     });
 })
 };     
+module.exports = {register, login , logout, localLogin}; 

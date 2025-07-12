@@ -1,33 +1,72 @@
 //Entrypoint for app js 
 require("dotenv").config();
 require("./config/connection");
-require("./config/authStrategy");
+require("./config/authStrategy.js");
 
 const express = require("express");
+const morgan = require("morgan");
+const helmet = require("helmet");
+const cors = require("cors");
+const path = require ("node:path");
+
+const session = require("express-session");
+const passport = require("passport");
+
 const app = express();
-// const for bookRoutes 
+
+
 
 const bookRoutes = require("./routes/bookRoutes");
+const authRoutes = require("./routes/authRoutes.js");
 
 
 const PORT = process.env.PORT || 8080;
 // require the following dependencies 
-const path = require("node:path");
-const morgan = require("morgan");
-const helmet = require("helmet");
-const cors = require("cors");
-const session = require("express-session");
-const passport = require("passport");
+
+
 
 //middleware section 
 
-app.use(cors());
+app.use(cors({ credentials: true, origin: true }));
 app.use(morgan("dev"));
 app.use(helmet({contentSecurityPolicy: false}));
+
+
+
 app.use (express.json());
 app.use(express.urlencoded({extended:true}));
+app.use(express.static(path.join(__dirname,"/public")));
+app.use(
+  session({
+    resave: false,
+    saveUninitialized: false,
+    secret: process.env.SECRET_KEY,
+    cookie: {
+      httpOnly: true,
+      secure: false,
+      maxAge: 1000 * 60 * 60 * 24,
+    },
+  })
+);
+app.use(passport.session());
+app.use(passport.initialize());
+
+
+
 app.use("/api/books",bookRoutes);
-app.use(express.static(path.join(__dirname+"/public")));
+app.use("/auth", authRoutes);
+
+
+
+
+// app.use(require('express-session')({ 
+//   secret: process.env.SECRET_KEY,
+//   resave: true,
+//   saveUninitialized: true
+//  }));
+
+
+
 
 app.use((err,req,res,next) =>{
    if (err.code === 11000){
@@ -42,7 +81,13 @@ app.use((err,req,res,next) =>{
   });
 });
 
+app.get("/",(req,res,next) => {
+  res.status( 200).json({
+    success:{ message: "You did that" },
+    statusCode:(200),
 
+});
+})
 
     app.listen(PORT,() =>{
       console.log(`Server is listening on port ${PORT},Connection has been established`);
