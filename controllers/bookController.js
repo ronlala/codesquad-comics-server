@@ -102,8 +102,8 @@ try{
     if  (!title||!author||!pages){
     throw new Error("Missing some Required information try again")
 }
-    const updateBook = await Book.findByIDAndUpdate(
-        _id,
+    const updatedBook = await Book.findByIdAndUpdate(
+        id,
         {
         $set:{title,
         author,
@@ -117,43 +117,37 @@ try{
     },
     {new: true}
 );
-    // const book = booksData.find((book) => book._id === _id);
-    // booksData[foundBookIndex] = newBook;
+  
     if (!updatedBook){
         throw new Error("Book not found");
     }
     return res.status(201).json({
-        success:{message: "New book has been added to the Libray "},
+        success:{message: "Book has now been updated"},
         data: {updatedBook},
         statusCode: 201
     });
-} catch (error){
-    // return res.status(400).json({
-    //     error:{ message: " There was an error updating your book in the library"},
-    // });
+} catch (error){ return next(error);
+ 
 
 }
 };
 
 const deleteBook = async (req,res,next) => {
     
-    const{_id} = req.params;
+    const{id} = req.params;
 
     
     try {
-    if (!_id){
+    if (!id){
         throw new Error("Book not found id needed");
     }
-        // const removeBook =books.filter((book) => book._id !== _id);
-        // console.log(removeBook)
-     await Book.findByIDAndDelete(_id);
+    
+     await Book.findByIdAndDelete(id);
         return res.status(200).json({
         success: { message: " Book has been deleted from the library"},
         });
     } catch (error) {
-        // return res.status(400).json({
-        //     error: { message: "There is an error deleting a book"},
-        // });
+       
         return next(error)
     }
 };
