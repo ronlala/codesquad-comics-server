@@ -32,7 +32,7 @@ const getBook = async(req,res,next) => {
         if(!id){
             throw new Error("Id is required");
         }
-        const book = book.findbyID(id)
+        const book = book.findbyId(id)
         if (!book) {
             throw new Error("Book not found");
         
