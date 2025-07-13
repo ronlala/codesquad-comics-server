@@ -27,7 +27,7 @@ const bookSchema = new Schema({
         required: true,},
     synopsis: {
         type: String,
-        required: true,
+        required: false,
         trim: true,},
     image: {
         type: String,
