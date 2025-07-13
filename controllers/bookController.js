@@ -24,7 +24,7 @@ const getAllBooks = async (req,res,next) => {
 };
 
 const getBook = async(req,res,next) => {
-    const {_id} = req.param;
+    const {_id} = req.params;
     try{
         // const books = booksLibrary.find(booksLibrary =>
         //     bookInventory._id ===Number( _id));
@@ -93,7 +93,7 @@ await newBook.save()
 
 // changed to udpateBook same as editBook. i changed it for learning purposes
 const updateBook = async(req,res,next) => {
-    const{id} = req.params;
+    const{_id} = req.params;
     const {title , author, publisher,  genre, pages, rating, synopsis, image} = req.body;
 
 
@@ -103,7 +103,7 @@ try{
     throw new Error("Missing some Required information try again")
 }
     const updatedBook = await Book.findByIdAndUpdate(
-        id,
+        _id,
         {
         $set:{title,
         author,
@@ -134,11 +134,11 @@ try{
 
 const deleteBook = async (req,res,next) => {
     
-    const{id} = req.params;
+    const{_id} = req.params;
 
     
     try {
-    if (!id){
+    if (!_id){
         throw new Error("Book not found id needed");
     }
     
@@ -154,32 +154,3 @@ const deleteBook = async (req,res,next) => {
 
 module.exports ={getAllBooks, getBook, createBook, updateBook, deleteBook};
 
-//   router.get("/:id", (req,res,next) => {
-//       res.status(200).json({
-//           success:{
-//           Message:"This will Send a single book by its id"},
-//           statusCode:200});
-//   });
- 
-//   router.post("/create/new", (req,res,next) => {
-//       res.status(200).json({
-//           success:{
-//           Message:"This will create a new book"},
-//           statusCode:200});
-//   });
-
-
-//   router.put("/update/:id", (req,res,next) => {
-//       res.status(200).json({
-//           success:{
-//           Message:"This will update a book by its id"},
-//           statusCode:200});
-
-//   });
-//  router.delete("/delete/:id", (req,res,next) => {
-//       res.status(200).json({
-//           success:{
-//           Message:"This will delete a book by its id"},
-//           statusCode:200});
-//   });
-// module.exports = router;
