@@ -24,15 +24,15 @@ const getAllBooks = async (req,res,next) => {
 };
 
 const getBook = async(req,res,next) => {
-    const {_id} = req.params;
+    const {id} = req.params;
     try{
         // const books = booksLibrary.find(booksLibrary =>
         //     bookInventory._id ===Number( _id));
            
-        if(!_id){
+        if(!id){
             throw new Error("Id is required");
         }
-        const book = book.findbyID(_id)
+        const book = book.findbyID(id)
         if (!book) {
             throw new Error("Book not found");
         
@@ -53,16 +53,6 @@ const getBook = async(req,res,next) => {
 const createBook = async(req,res,next) => {
     const {title , author, publisher,  genre, pages, rating, synopsis, image} = req.body;
 
-// const newBook = {
-//   title,
-//   author,
-//   publisher,
-//   genre,
-//   pages,
-//   rating,
-//   synopsis,
-//   image
-// };
 
 try{
 if  (!title||!author||!pages){
@@ -93,7 +83,7 @@ await newBook.save()
 
 // changed to udpateBook same as editBook. i changed it for learning purposes
 const updateBook = async(req,res,next) => {
-    const{_id} = req.params;
+    const{id} = req.params;
     const {title , author, publisher,  genre, pages, rating, synopsis, image} = req.body;
 
 
@@ -103,7 +93,7 @@ try{
     throw new Error("Missing some Required information try again")
 }
     const updatedBook = await Book.findByIdAndUpdate(
-        _id,
+        id,
         {
         $set:{title,
         author,
@@ -134,11 +124,11 @@ try{
 
 const deleteBook = async (req,res,next) => {
     
-    const{_id} = req.params;
+    const{id} = req.params;
 
     
     try {
-    if (!_id){
+    if (!id){
         throw new Error("Book not found id needed");
     }
     
